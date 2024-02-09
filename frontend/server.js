@@ -1,8 +1,10 @@
+// Сервер для обработки статических данных React проекта
 const express = require('express');
+const env = require('./config/env');
 const path = require('path');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const serverPort = env.serverPort;
 
 // Обслуживание статических файлов из папки build
 app.use(express.static(path.join(__dirname, 'build')));
@@ -13,6 +15,6 @@ app.get('*', (req, res) => {
 });
 
 // Запуск Express сервера
-app.listen(port, () => {
-    console.log(`Сервер запущен на порте ${port}`);
+app.listen(serverPort, () => {
+    console.log(`Сервер запущен на порте ${serverPort}`);
 });
