@@ -5,11 +5,11 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Обслуживание статических файлов из папки build
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, 'build')));
 
 // Обработка всех остальных запросов отправляет index.html
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 // Запуск Express сервера

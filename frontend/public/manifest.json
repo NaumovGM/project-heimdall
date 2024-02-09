@@ -1,0 +1,39 @@
+{
+    "name": "Heimdall",
+    "short_name": "Heimdall",
+    "start_url": "/",
+    "background_color": "#fff",
+    "theme_color": "#fff",
+    "display": "standalone",
+    "description": "Heimdall",
+    "lang": "ru-RU",
+    "orientation": "portrait",
+    "scope": "/",
+    "prefer_related_applications": false,
+    "related_applications": [],
+    "categories": ["utilities"],
+    "dir": "ltr",
+    "serviceworker": {
+        "src": "service-worker.js",
+        "scope": "/",
+        "update_via_cache": "imports",
+        "registration_strategy": "register"
+    },
+    "icons": [
+        {
+            "src": "favicon.ico",
+            "sizes": "64x64 32x32 24x24 16x16",
+            "type": "image/x-icon"
+        },
+        {
+            "src": "images/logo192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "images/logo512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ]
+}

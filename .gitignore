@@ -136,3 +136,6 @@ dist
 
 #project
 package-lock.json
+
+# Generate output
+build
