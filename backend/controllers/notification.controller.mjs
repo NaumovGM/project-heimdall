@@ -1,6 +1,5 @@
 // Контроллер управления уведомлений
-
-import logger from '../utils/logger.mjs';
+import Response from '../utils/response.mjs';
 
 class NotificationController {
     // Связывание контекста класса с методами
@@ -16,7 +15,7 @@ class NotificationController {
             { id: 2, type: 'Обычное', date: '2024-02-09', title: 'Уведомление 2', body: 'Текст второго уведомления' },
             { id: 3, type: 'Информация', date: '2024-02-08', title: 'Уведомление 3', body: 'Текст третьего уведомления' },
         ];
-        res.status(200).json(testNotifications);
+        Response.success(req, res, testNotifications);
     }
 
     // Получение одного уведомления
@@ -41,7 +40,7 @@ class NotificationController {
     // Webhook для сервиса Grafana
     async createNotificationGrafana(req, res, next) {
         const notification = await this.#createNotification();
-        res.status(200).json({ status: true });
+        Response.success(req, res, 'Все ок');
     }
 
     /* 

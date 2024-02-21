@@ -1,4 +1,4 @@
-// Загрузка файла конфигурации .env
+// Конфигурации запуска .env
 import { config } from 'dotenv';
 config();
 

@@ -26,7 +26,7 @@ if (env.JWT_SECRET) {
         if (answer.trim().toLowerCase() === 'да') {
             generateAndWriteJwtSecret(env, envFilePath);
         } else {
-            console.log('[generateJwtSecret] Отмена генерации JWT Secret.');
+            console.log('[generateJwtSecret] Отмена генерации JWT Secret');
             process.exit(0);
         }
         rl.close();

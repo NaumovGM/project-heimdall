@@ -31,7 +31,7 @@ if (existingVapidPublicKey || existingVapidPrivateKey) {
             if (answer.trim().toLowerCase() === 'да') {
                 generateAndWriteVapidKeys(env, envFilePath);
             } else {
-                console.log('[generateVapidKeys] Отмена генерации VAPID ключей.');
+                console.log('[generateVapidKeys] Отмена генерации VAPID ключей');
                 process.exit(0);
             }
             rl.close();

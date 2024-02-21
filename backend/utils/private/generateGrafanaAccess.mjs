@@ -32,7 +32,7 @@ if (existingGrafanaUsername || existingGrafanaPassword || existingGrafanaUrl) {
             if (answer.trim().toLowerCase() === 'да') {
                 generateAndWriteGrafanaAccess(env, envFilePath);
             } else {
-                console.log('[generateGrafanaAccess] Отмена генерации доступа для Grafana.');
+                console.log('[generateGrafanaAccess] Отмена генерации доступа для Grafana');
                 process.exit(0);
             }
             rl.close();
