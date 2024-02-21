@@ -3,7 +3,7 @@
 module.exports = {
     apps: [
         {
-            name: 'backend-heimdall',
+            name: 'heimdall',
             script: 'app.mjs',
             instances: 1,
             exec_mode: 'fork',

@@ -1,0 +1,34 @@
+.notification-list {
+    margin-top: 20px;
+}
+
+.notification {
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Более скругленные края */
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+}
+
+.notification-header {
+    display: flex;
+    justify-content: space-between; /* Располагаем тип и дату по краям */
+    margin-bottom: 0px; /* Уменьшаем расстояние между заголовком и телом */
+}
+
+.notification-type {
+    font-weight: bold;
+}
+
+.notification-date {
+    color: #555;
+}
+
+.notification-title {
+    color: #333;
+    margin-bottom: 5px; /* Уменьшаем расстояние между заголовком и текстом */
+}
+
+.notification-body {
+    color: #777;
+}

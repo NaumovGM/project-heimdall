@@ -1,5 +1,6 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
     output: {
@@ -10,6 +11,7 @@ module.exports = {
         new CopyWebpackPlugin({
             patterns: [{ from: 'public', to: '.' }],
         }),
+        new webpack.HotModuleReplacementPlugin(),
     ],
     module: {
         rules: [
@@ -30,5 +32,10 @@ module.exports = {
                 options: { limit: false },
             },
         ],
+    },
+    entry: './src/index.js',
+    devServer: {
+        port: 3000,
+        liveReload: true,
     },
 };
