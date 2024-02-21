@@ -3,7 +3,7 @@ import { Schema, model } from 'mongoose';
 
 const ProfileTopicType = {
     GENERAL: 0, // Главный
-    OTHER: 1, // Прочее
+    GRAFANA: 1, // Прочее
 };
 
 const ProfileTopicSchema = new Schema(
@@ -19,6 +19,10 @@ const ProfileTopicSchema = new Schema(
             enum: Object.values(ProfileTopicType),
             required: true,
             default: 0,
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,
         },
     },
     { versionKey: false },

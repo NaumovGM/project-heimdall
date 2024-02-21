@@ -8,10 +8,40 @@ const ProfileSchema = new Schema(
             required: true,
             index: true,
             unique: true,
+            validate: {
+                validator: function (value) {
+                    // Проверка начальной цифры и общей длины
+                    return /^7\d{10}$/.test(value.toString()); // Преобразование в строку для проверки регулярным выражением
+                },
+                message: 'Неверный формат номера телефона',
+            },
         },
-        fullName: {
+        email: {
             type: String,
             required: true,
+            unique: true,
+            validate: {
+                validator: function (value) {
+                    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+                },
+                message: 'Неверный формат электронной почты',
+            },
+        },
+        surname: {
+            type: String,
+            required: true,
+        },
+        name: {
+            type: String,
+            required: true,
+        },
+        patronymic: {
+            type: String,
+            required: true,
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,
         },
     },
     { versionKey: false },

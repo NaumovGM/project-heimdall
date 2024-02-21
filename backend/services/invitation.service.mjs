@@ -6,8 +6,10 @@ class InvitationService {
         return await invitation.save();
     }
 
-    async findInvitationByPhone(phone) {
-        return await Invitation.findOne({ phone });
+    async findInvitationByPhoneOrPhone(phone, email) {
+        return await Invitation.findOne({
+            $or: [{ phone }, { email }],
+        });
     }
 
     async findInvitationByID(id) {

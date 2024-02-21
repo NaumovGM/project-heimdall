@@ -37,9 +37,9 @@ function askQuestion(index, answers) {
         rl.close();
 
         // Запуск очереди скриптов по порядку
-        spawnSync('node', ['generateJwtSecret.mjs'], { stdio: 'inherit' });
-        spawnSync('node', ['generateVapidKeys.mjs'], { stdio: 'inherit' });
-        spawnSync('node', ['generateGrafanaAccess.mjs'], { stdio: 'inherit' });
+        spawnSync('node', ['./generate/generateJwtSecret.mjs'], { stdio: 'inherit' });
+        spawnSync('node', ['./generate/generateVapidKeys.mjs'], { stdio: 'inherit' });
+        spawnSync('node', ['./generate/generateGrafanaAccess.mjs'], { stdio: 'inherit' });
         process.exit(0);
     }
 }

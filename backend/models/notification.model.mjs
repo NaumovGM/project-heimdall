@@ -6,12 +6,27 @@ const NotificationStatus = {
     RECEIVED: 1, // Получено
 };
 
+const NotificationType = {
+    ONE: 0, // Один получателя
+    MANY: 1, // Несколько получателей
+};
+
 const NotificationSchema = new Schema(
     {
+        type: {
+            type: Number,
+            enum: Object.values(NotificationType),
+            required: true,
+        },
         profile: {
             type: Schema.Types.ObjectId,
             ref: 'profiles',
-            required: true,
+            required: [
+                function () {
+                    return this.type == 0; // Обязателен в случае когда NotificationType == ONE
+                },
+                'Профиль обязателен для заполнения',
+            ],
             index: true,
         },
         title: {
@@ -31,6 +46,10 @@ const NotificationSchema = new Schema(
             enum: Object.values(NotificationStatus),
             required: true,
             default: 0,
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,
         },
     },
     { versionKey: false },

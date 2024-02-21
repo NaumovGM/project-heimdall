@@ -1,8 +1,8 @@
 import fs from 'fs';
 import readline from 'readline';
-import Invitation from '../../models/invitation.model.mjs';
-import db from '../../services/index.mjs';
+import db from '../../../services/index.mjs';
 import dotenv from 'dotenv';
+import InvitationService from '../../../services/invitation.service.mjs';
 
 // Создание интерфейса для чтения из stdin и записи в stdout
 const rl = readline.createInterface({
@@ -11,10 +11,10 @@ const rl = readline.createInterface({
 });
 
 // Функция для создания записи приглашения
-const createInvitation = async (phone, email, surname, name, patronymic) => {
+const createInvitation = async (phone, email, surname, name, patronymic, department) => {
     try {
         // Проверка, что все параметры переданы
-        if (!phone || !email || !surname || !name || !patronymic) {
+        if (!phone || !email || !surname || !name || !patronymic || !department) {
             throw new Error('[createInvitation] Необходимо заполнить все поля');
         }
 
@@ -22,26 +22,26 @@ const createInvitation = async (phone, email, surname, name, patronymic) => {
         await db.mongoose.connect(env.MONGO_URL, {});
 
         // Проверка, что телефон и email уникальны
-        const existingInvitation = await Invitation.findOne({
-            $or: [{ phone }, { email }],
-        });
+        const existingInvitation = await InvitationService.findInvitationByPhoneOrPhone(phone, email);
         if (existingInvitation) {
             throw new Error('[createInvitation] Приглашение с таким телефоном или почтой уже существует');
         }
 
         // Создание новой записи приглашения
-        const newInvitation = new Invitation({
+        const newInvitation = {
+            // Раскладывание по полям из-за сборки объекта модели
             phone: phone,
             email: email,
             surname: surname,
             name: name,
             patronymic: patronymic,
-        });
+            department: department,
+        };
 
         // Сохранение записи в базе данных
-        await newInvitation.save();
+        const resultInvitation = await InvitationService.createInvitation(newInvitation);
 
-        console.log('[createInvitation] Приглашение успешно создано, ключ для пользователя:', newInvitation.key);
+        console.log('[createInvitation] Приглашение успешно создано, ключ для пользователя:', resultInvitation.key);
         process.exit(0);
     } catch (error) {
         console.error('[createInvitation] ', error.message);
@@ -75,9 +75,10 @@ const promptUser = async () => {
     const surname = await askQuestion('Введите фамилию: ');
     const name = await askQuestion('Введите имя: ');
     const patronymic = await askQuestion('Введите отчество: ');
+    const department = await askQuestion('Введите номер отдела (DEPARTMENT1 = 0, DEPARTMENT2 = 1): ');
 
     // Вызов функции создания приглашения с переданными параметрами
-    createInvitation(phone, email, surname, name, patronymic);
+    createInvitation(phone, email, surname, name, patronymic, department);
 
     // Закрытие интерфейса ввода-вывода
     rl.close();

@@ -7,6 +7,11 @@ const InvitationStatus = {
     ACCEPTED: 1, // Принято
 };
 
+const InvitationDepartment = {
+    DEPARTMENT_1: 0, // Первый департамент
+    DEPARTMENT_2: 1, // Второй департамент
+};
+
 const InvitationSchema = new Schema(
     {
         phone: {
@@ -45,16 +50,25 @@ const InvitationSchema = new Schema(
             type: String,
             required: true,
         },
-        key: {
-            type: Schema.Types.UUID,
-            default: uuidv4,
-            unique: true,
+        department: {
+            type: Number,
+            enum: Object.values(InvitationDepartment),
+            required: true,
         },
         status: {
             type: Number,
             enum: Object.values(InvitationStatus),
             required: true,
             default: 0,
+        },
+        key: {
+            type: Schema.Types.UUID,
+            default: uuidv4,
+            unique: true,
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,
         },
     },
     { versionKey: false },
